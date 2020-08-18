@@ -1,0 +1,20 @@
+'''
+Includes Flask and database configurations.
+'''
+
+# External imports
+import os
+import flask
+import mysql.connector
+
+# Initialize Flask API
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+
+# Connect to database
+con = mysql.connector.connect(host=os.getenv('DB_HOST'),
+                              user=os.getenv('DB_USER'),
+                              password=os.getenv('DB_PASS'),
+                              database=os.getenv('DB_NAME'),
+                              auth_plugin=os.getenv('DB_AUTH'))
+db = con.cursor()
