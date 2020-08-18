@@ -2,4 +2,7 @@
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
+    "files.exclude": {
+        "**/__*": true
+    }
 }
