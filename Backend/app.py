@@ -4,7 +4,7 @@ Runs the backend.
 
 import os  # External import
 
-from config import app  # Flask app import
+from src.config import app  # Flask app import
 
 # Route imports
 from src.controllers.test import test_controller
