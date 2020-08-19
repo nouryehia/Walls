@@ -4,4 +4,4 @@
 `python3 app.py`
 
 ## Install/Upgrade Modules
-`/usr/bin/env python3 -m --user pip install --upgrade MODULE_NAME`
+`/usr/bin/env python3 -m pip install --user --upgrade MODULE_NAME`
