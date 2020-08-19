@@ -9,8 +9,23 @@
 import SwiftUI
 
 struct Signup: View {
+    @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                Text("Sign Up Page")
+                
+                HStack {
+                    Text("Already have an account?")
+                    Button(action: {self.presentation.wrappedValue.dismiss()}) {
+                        Text("Log in")
+                    }
+                    Text(".")
+                        .padding(.leading, -8.5)
+                }
+            }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

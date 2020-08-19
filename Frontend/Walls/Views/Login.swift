@@ -9,8 +9,34 @@
 import SwiftUI
 
 struct Login: View {
+    @State var incorrectCredentials = false
+    @State var usernameOrEmail = ""
+    @State var password = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                TextField("Username or email", text: $usernameOrEmail)
+                TextField("Password", text: $password)
+                
+                if (incorrectCredentials) {
+                    Text("Incorrect credentials.")
+                }
+                
+                NavigationLink(destination: Home()) {
+                   Text("Log In")
+                }.disabled(usernameOrEmail == "" || password == "")
+                
+                HStack {
+                    Text("Don't have an account?")
+                    NavigationLink(destination: Signup()) {
+                        Text("Sign up")
+                    }
+                    Text(".")
+                        .padding(.leading, -8.5)
+                }
+            }
+        }
     }
 }
 
