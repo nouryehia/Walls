@@ -9,15 +9,26 @@
 import SwiftUI
 
 struct Home: View {
+    @Binding var id: Int
+    
     var body: some View {
-        Text("Home Page")
-        
-        .navigationBarBackButtonHidden(true)
+        VStack {
+            Text("Home Page")
+            Text("User ID: \(id)")
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        PreviewWrapper()
+    }
+    
+    struct PreviewWrapper: View {
+        @State(initialValue: Id().id) var id: Int
+
+        var body: some View {
+            Home(id: $id)
+        }
     }
 }

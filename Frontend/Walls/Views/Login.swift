@@ -13,6 +13,8 @@ struct Login: View {
     @State var usernameOrEmail = ""
     @State var password = ""
     
+    @ObservedObject var id = Id()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -23,7 +25,7 @@ struct Login: View {
                     Text("Incorrect credentials.")
                 }
                 
-                NavigationLink(destination: Home()) {
+                NavigationLink(destination: Home(id: self.$id.id)) {
                    Text("Log In")
                 }.disabled(usernameOrEmail == "" || password == "")
                 
