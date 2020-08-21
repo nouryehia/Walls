@@ -29,7 +29,7 @@ struct Signup: View {
     
     @State var disableButton = true
     
-    @ObservedObject var id = Id()
+    @State var id = 0
     
     let usernames: [String]
     let emails: [String]
@@ -58,6 +58,7 @@ struct Signup: View {
                     if (!edit) {
                         self.updateButtonState()
                     }
+                    
                 }).onReceive(firstName.publisher.collect()) {
                     self.firstName = String($0.prefix(self.MAX_LENGTH))
                 }
@@ -66,6 +67,7 @@ struct Signup: View {
                     if (!edit) {
                         self.updateButtonState()
                     }
+                    
                 }).onReceive(lastName.publisher.collect()) {
                     self.lastName = String($0.prefix(self.MAX_LENGTH))
                 }
@@ -190,19 +192,21 @@ struct Signup: View {
                     }
                 }
                 
-                NavigationLink(destination: Destination(Home(id: self.$id.id))) {
+                NavigationLink(destination: Home(id: self.id), isActive: binding(id != 0)) {
                     Text("Sign Up")
+                
                 }.disabled(disableButton)
+                
                  .simultaneousGesture(TapGesture().onEnded {
                     if (!self.disableButton) {
-                        self.id.id = (api(endpoint: "user/signup", method: "POST",
-                                      body: ["first_name": self.firstName,
-                                             "last_name": self.lastName,
-                                             "username": self.username.lowercased(),
-                                             "email": self.email.lowercased(),
-                                             "password": self.password,
-                                             "profile_photo": self.profilePhoto])
-                                      as! [String: Any])["id"] as! Int
+                        self.id = (api(endpoint: "user/signup", method: "POST",
+                                       body: ["first_name": self.firstName,
+                                              "last_name": self.lastName,
+                                              "username": self.username.lowercased(),
+                                              "email": self.email.lowercased(),
+                                              "password": self.password,
+                                              "profile_photo": self.profilePhoto])
+                                   as! [String: Any])["id"] as! Int
                     }
                 })
                 

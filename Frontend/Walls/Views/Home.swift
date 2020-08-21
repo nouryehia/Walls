@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct Home: View {
-    @Binding var id: Int
+    let id: Int
     
     var body: some View {
         VStack {
@@ -21,14 +21,6 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewWrapper()
-    }
-    
-    struct PreviewWrapper: View {
-        @State(initialValue: Id().id) var id: Int
-
-        var body: some View {
-            Home(id: $id)
-        }
+        Home(id: 1)
     }
 }
